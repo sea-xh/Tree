@@ -17,7 +17,7 @@ const NodeList: React.FC<NodeListProps> = (props) => {
 
   const mergedData = data;
 
-  const treeNodeRequiredProps = {
+  const TreeNodeProps = {
     expandedKeys,
     selectedKeys,
     keyEntities,
@@ -36,7 +36,7 @@ const NodeList: React.FC<NodeListProps> = (props) => {
         // const { key, children, ...otherProps } = restProps;
         delete restProps.key;
         delete restProps.children;
-        const treeNodeProps = getTreeNodeProps(mergedKey, treeNodeRequiredProps);
+        const treeNodeProps = getTreeNodeProps(mergedKey, TreeNodeProps);
 
         return <TreeNode {...restProps} {...treeNodeProps} data={treeNode.data} isStart={isStart} isEnd={isEnd} />;
       }}

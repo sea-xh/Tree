@@ -5,7 +5,7 @@ import { TreeContext, TreeContextProps } from './contextTypes';
 import { getDataAndAria } from './util';
 import { Key } from './interface';
 import Indent from './Indent';
-import { convertNodePropsToEventData } from './treeUtil';
+import { convertNodeProps } from './treeUtil';
 
 const ICON_OPEN = 'open';
 const ICON_CLOSE = 'close';
@@ -25,21 +25,21 @@ class TreeNode extends React.Component<TreeNodeProps, any> {
     const {
       context: { onMouseEnter },
     } = this.props;
-    onMouseEnter(e, convertNodePropsToEventData(this.props));
+    onMouseEnter(e, convertNodeProps(this.props));
   };
 
   onMouseLeave = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const {
       context: { onMouseLeave },
     } = this.props;
-    onMouseLeave(e, convertNodePropsToEventData(this.props));
+    onMouseLeave(e, convertNodeProps(this.props));
   };
 
   onExpand: React.MouseEventHandler<HTMLDivElement> = (e) => {
     const {
       context: { onNodeExpand },
     } = this.props;
-    onNodeExpand(e, convertNodePropsToEventData(this.props));
+    onNodeExpand(e, convertNodeProps(this.props));
   };
 
   hasChildren = () => {

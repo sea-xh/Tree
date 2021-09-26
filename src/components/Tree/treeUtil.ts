@@ -1,9 +1,9 @@
 //@ts-nocheck
-import { DataNode, FlattenNode, DataEntity, Key, EventDataNode, GetKey, FieldNames } from './interface';
+import { DataNode, FlattenNode, DataEntity, FieldNames } from './interface';
 import { getPosition } from './util';
 import { TreeNodeProps } from './TreeNode';
 
-export function getKey(key: Key) {
+export function getKey(key) {
   if (key !== null && key !== undefined) {
     return key;
   }
@@ -21,7 +21,7 @@ export function fillFieldNames(fieldNames?: FieldNames) {
 
 export function flattenTreeData(
   treeNodeList: DataNode[],
-  expandedKeys: Key[] | true,
+  expandedKeys: [] | true,
   fieldNames: FieldNames,
 ): FlattenNode[] {
   const { key: fieldKey, children: fieldChildren } = fillFieldNames(fieldNames);
@@ -56,7 +56,7 @@ export function flattenTreeData(
 
 export function traverseNodes(
   dataNodes: DataNode[],
-  callback: (data: { node: DataNode; index: number; key: Key; parentPos: string | number; level: number }) => void,
+  callback: (data: { node: DataNode; index: number; key; parentPos: string | number; level: number }) => void,
   config?: string,
 ) {
   let mergedConfig = {};
@@ -73,12 +73,12 @@ export function traverseNodes(
 
   const mergeChildrenPropName = childrenPropName || fieldChildren;
 
-  let syntheticGetKey: (node: DataNode, pos?: string) => Key;
+  let syntheticGetKey: (node: DataNode, pos?: string) => any;
   if (externalGetKey) {
     if (typeof externalGetKey === 'string') {
-      syntheticGetKey = (node: DataNode) => (node as any)[externalGetKey as string];
+      syntheticGetKey = (node: DataNode) => node;
     } else if (typeof externalGetKey === 'function') {
-      syntheticGetKey = (node: DataNode) => (externalGetKey as GetKey<DataNode>)(node);
+      syntheticGetKey = (node: DataNode) => externalGetKey(node);
     }
   } else {
     syntheticGetKey = (node, pos) => getKey(node[fieldKey], pos);
@@ -89,7 +89,7 @@ export function traverseNodes(
     const pos = node ? getPosition(parent.pos, index) : '0';
 
     if (node) {
-      const key: Key = syntheticGetKey(node, pos);
+      const key = syntheticGetKey(node, pos);
       const data = {
         node,
         index,
@@ -141,22 +141,22 @@ export function convertDataToEntities(dataNodes) {
   return wrapper;
 }
 
-export interface TreeNodeRequiredProps {
-  expandedKeys: Key[];
-  selectedKeys: Key[];
+export interface TreeNodeProps {
+  expandedKeys: [];
+  selectedKeys: [];
   keyEntities: any;
 }
 
-export function getTreeNodeProps(key: Key, { expandedKeys, selectedKeys }: TreeNodeRequiredProps) {
+export function getTreeNodeProps(key, { expandedKeys, selectedKeys }: TreeNodeProps) {
   const treeNodeProps = {
     eventKey: key,
-    expanded: expandedKeys.indexOf(key) !== -1,
-    selected: selectedKeys.indexOf(key) !== -1,
+    expanded: expandedKeys.indexOf(key) >= 0,
+    selected: selectedKeys.indexOf(key) >= 0,
   };
   return treeNodeProps;
 }
 
-export function convertNodePropsToEventData(props: TreeNodeProps): EventDataNode {
+export function convertNodeProps(props: TreeNodeProps) {
   const { data, expanded, selected } = props;
 
   const eventData = {
