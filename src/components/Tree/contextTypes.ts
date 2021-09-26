@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 export interface TreeContextProps {
-  prefixCls: string;
   selectable: boolean;
   switcherIcon: any;
   keyEntities: any;

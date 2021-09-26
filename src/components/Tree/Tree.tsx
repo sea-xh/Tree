@@ -1,6 +1,6 @@
 //@ts-nocheck
 import * as React from 'react';
-import './assets/index.scss';
+import './index.scss';
 import { TreeContext } from './contextTypes';
 import { arrAdd, arrDel } from './util';
 import { DataNode, FlattenNode, EventDataNode, FieldNames } from './interface';

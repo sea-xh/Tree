@@ -54,20 +54,12 @@ export function flattenTreeData(
   return flattenList;
 }
 
-type ExternalGetKey = GetKey<DataNode> | string;
-
-interface TraverseDataNodesConfig {
-  childrenPropName?: string;
-  externalGetKey?: ExternalGetKey;
-  fieldNames?: FieldNames;
-}
-
-export function traverseDataNodes(
+export function traverseNodes(
   dataNodes: DataNode[],
   callback: (data: { node: DataNode; index: number; key: Key; parentPos: string | number; level: number }) => void,
-  config?: TraverseDataNodesConfig | string,
+  config?: string,
 ) {
-  let mergedConfig: TraverseDataNodesConfig = {};
+  let mergedConfig = {};
   if (typeof config === 'object') {
     mergedConfig = config;
   } else {
@@ -130,7 +122,7 @@ export function convertDataToEntities(dataNodes) {
     posEntities,
     keyEntities,
   };
-  traverseDataNodes(dataNodes, (item) => {
+  traverseNodes(dataNodes, (item) => {
     const { node, index, pos, key, parentPos, level } = item;
     const entity: DataEntity = { node, index, key, pos, level };
 
