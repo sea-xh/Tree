@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React from 'react';
-import Tree from '../src/components/Tree';
+import Tree from './Tree';
 
 const treeData = [
   {

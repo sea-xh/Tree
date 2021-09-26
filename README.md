@@ -10,9 +10,8 @@
 | onMouseEnter | --          | function({event,node})      | -       |
 | onMouseLeave | --          | function({event,node})      | -       |
 
-## Development
+## 位置
 
-```bash
-yarn install
-yarn start
-```
+- 组件：/src/Tree 调用：src/App.tsx
+
+* 伪代码，描述大致逻辑，can't run
