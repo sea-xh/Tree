@@ -1,9 +1,5 @@
 //@ts-nocheck
-import { TreeNodeProps } from './TreeNode';
-import { Key } from './interface';
-import { TreeProps } from './Tree';
-
-export function arrDel(list: Key[], value: Key) {
+export function arrDel(list: [], value) {
   const clone = list.slice();
   const index = clone.indexOf(value);
   if (index >= 0) {
@@ -12,7 +8,7 @@ export function arrDel(list: Key[], value: Key) {
   return clone;
 }
 
-export function arrAdd(list: Key[], value: Key) {
+export function arrAdd(list, value) {
   const clone = list.slice();
   if (clone.indexOf(value) === -1) {
     clone.push(value);
@@ -24,8 +20,8 @@ export function getPosition(level: string | number, index: number) {
   return `${level}-${index}`;
 }
 
-export function getDataAndAria(props: Partial<TreeProps | TreeNodeProps>) {
-  const omitProps: Record<string, string> = {};
+export function getDataAndAria(props) {
+  const omitProps = {};
   Object.keys(props).forEach((key) => {
     if (key.startsWith('data-') || key.startsWith('aria-')) {
       omitProps[key] = props[key];

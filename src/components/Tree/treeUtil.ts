@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { DataNode, FlattenNode, DataEntity, FieldNames } from './interface';
+import { DataNode, FlattenNode, FieldNames } from './interface';
 import { getPosition } from './util';
 import { TreeNodeProps } from './TreeNode';
 
@@ -124,7 +124,7 @@ export function convertDataToEntities(dataNodes) {
   };
   traverseNodes(dataNodes, (item) => {
     const { node, index, pos, key, parentPos, level } = item;
-    const entity: DataEntity = { node, index, key, pos, level };
+    const entity = { node, index, key, pos, level };
 
     const mergedKey = getKey(key);
 

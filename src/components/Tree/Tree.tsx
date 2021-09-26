@@ -3,7 +3,7 @@ import * as React from 'react';
 import './index.scss';
 import { TreeContext } from './contextTypes';
 import { arrAdd, arrDel } from './util';
-import { DataNode, FlattenNode, EventDataNode, FieldNames } from './interface';
+import { DataNode, FlattenNode, FieldNames } from './interface';
 import { flattenTreeData, convertDataToEntities, fillFieldNames } from './treeUtil';
 import NodeList from './NodeList';
 
@@ -122,7 +122,7 @@ class Tree extends React.Component<TreeProps, TreeState> {
   };
 
   // 点击展开收起
-  onNodeExpand = (e: React.MouseEvent<HTMLDivElement>, treeNode: EventDataNode) => {
+  onNodeExpand = (e: React.MouseEvent<HTMLDivElement>, treeNode) => {
     let { expandedKeys } = this.state;
     const { fieldNames } = this.state;
     const { expanded } = treeNode;

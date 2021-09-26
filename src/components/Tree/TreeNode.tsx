@@ -3,7 +3,6 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { TreeContext, TreeContextProps } from './contextTypes';
 import { getDataAndAria } from './util';
-import { Key } from './interface';
 import Indent from './Indent';
 import { convertNodeProps } from './treeUtil';
 
@@ -11,7 +10,7 @@ const ICON_OPEN = 'open';
 const ICON_CLOSE = 'close';
 
 export interface TreeNodeProps {
-  eventKey?: Key;
+  eventKey?: any;
   prefixCls?: string;
   expanded?: boolean;
   isStart?: boolean[];
